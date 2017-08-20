@@ -53,10 +53,11 @@ namespace PCLCrypto
         /// <inheritdoc/>
         public ICryptographicKey CreateKeyPair(int keySize)
         {
-            Requires.Range(keySize > 0, "keySize");
+            throw new NotImplementedException();
+            //Requires.Range(keySize > 0, "keySize");
 
-            var rsa = new Platform.RSACryptoServiceProvider(keySize);
-            return new RsaCryptographicKey(rsa, this.algorithm);
+            //var rsa = new Platform.RSACryptoServiceProvider(keySize);
+            //return new RsaCryptographicKey(rsa, this.algorithm);
         }
 
         /// <inheritdoc/>
@@ -79,10 +80,10 @@ namespace PCLCrypto
                 }
             }
 
-            Platform.RSA rsa;
+            Platform.RSA rsa = null;
             if (CapiKeyFormatter.IsCapiCompatible(parameters))
             {
-                rsa = new Platform.RSACryptoServiceProvider();
+               // rsa = new Platform.RSACryptoServiceProvider();
             }
             else
             {
@@ -105,11 +106,12 @@ namespace PCLCrypto
         /// <inheritdoc/>
         public ICryptographicKey ImportPublicKey(byte[] keyBlob, CryptographicPublicKeyBlobType blobType = CryptographicPublicKeyBlobType.X509SubjectPublicKeyInfo)
         {
+            throw new NotImplementedException();
             Requires.NotNull(keyBlob, "keyBlob");
 
-            var rsa = new Platform.RSACryptoServiceProvider();
-            rsa.ImportParameters(KeyFormatter.ToPlatformParameters(KeyFormatter.GetFormatter(blobType).Read(keyBlob)));
-            return new RsaCryptographicKey(rsa, this.algorithm);
+            //var rsa = new Platform.RSACryptoServiceProvider();
+            //rsa.ImportParameters(KeyFormatter.ToPlatformParameters(KeyFormatter.GetFormatter(blobType).Read(keyBlob)));
+            //return new RsaCryptographicKey(rsa, this.algorithm);
         }
     }
 }
